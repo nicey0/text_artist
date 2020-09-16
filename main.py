@@ -28,12 +28,20 @@ def movement(key, mode, y, x, maxy, maxx, scr) -> (int, int, curses.window, str)
 def text(key, mode, y, x, maxy, maxx, scr) -> (int, int, curses.window):
     if key == curses.KEY_BACKSPACE:
         mode = "movement"
+    elif key == curses.KEY_LEFT:
+        y, x = inc_dim((0, -1), y, x, maxy, maxx)
+    elif key == curses.KEY_DOWN:
+        y, x = inc_dim((1, 0), y, x, maxy, maxx)
+    elif key == curses.KEY_RIGHT:
+        y, x = inc_dim((0, 1), y, x, maxy, maxx)
+    elif key == curses.KEY_UP:
+        y, x = inc_dim((-1, 0), y, x, maxy, maxx)
     key = chr(key)
     if key in "qwertyuiopasdfghjklzxcvbnm[]{}\\;':\",.<>/?123456789!@#$%^&*()-_+*| ":
         scr.addstr(y, x, key, curses.color_pair(1))
         y, x = inc_dim((0, 1), y, x, maxy, maxx)
     elif key == '\n':
-        y, x = inc_dim((1, 0), y, x, maxy, maxx)
+        y, x = inc_dim((1, -1), y, x, maxy, maxx)
     return y, x, scr, mode
 
 modes = {
