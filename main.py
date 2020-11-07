@@ -37,7 +37,7 @@ def text(key, mode, y, x, maxy, maxx, scr) -> (int, int, curses.window):
     elif key == curses.KEY_UP:
         y, x = inc_dim((-1, 0), y, x, maxy, maxx)
     key = chr(key)
-    if key in "qwertyuiopasdfghjklzxcvbnm[]{}\\;':\",.<>/?123456789!@#$%^&*()-_+*| ":
+    if key.lower() in "qwertyuiopasdfghjklzxcvbnm[]{}\\;':\",.<>/?0123456789!@#$%^&*()-_+*| ":
         scr.addstr(y, x, key, curses.color_pair(1))
         y, x = inc_dim((0, 1), y, x, maxy, maxx)
     elif key == '\n':
